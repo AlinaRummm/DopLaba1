@@ -117,7 +117,7 @@ int main(){
     while (i < dolznik.size() && j < komu_dolz.size()){
         double perevod = min(skolko_dolz[i], kredit[j]);
         if (perevod > 0.001){
-            cout << dolznik[i] << " " << komu_dolz[j] << endl;
+            cout << dolznik[i] << " " << perevod << " " << komu_dolz[j] << endl;
         }
 
         skolko_dolz[i] -= perevod;
