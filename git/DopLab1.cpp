@@ -90,10 +90,19 @@ int main(){
 
     file.close();
 
-    cout << fixed << setprecision(1); //чтоб выводилось с одним знаком после запятой
-    for (string name : names){
-        cout << name << " " << potratil[name] << " " << potrebil[name] << endl; // вывод сколько потретили и потребили для каждого 
+     ofstream outfile("output2.txt");
+    if (!outfile.is_open()){
+        cout << "не удалось создать output.txt" << endl;
+        return 1;
     }
+
+    cout << fixed << setprecision(1); 
+    outfile << fixed << setprecision(1);
+
+    for (string name : names){
+        cout << name << " " << potratil[name] << " " << potrebil[name] << endl; 
+        outfile << name << " " << potratil[name] << " " << potrebil[name] << endl; 
+
     vector<string> dolznik; // тот кто должен
     vector<double> skolko_dolz; // сколько должен 
     vector<string> komu_dolz; // кому должен
@@ -118,6 +127,7 @@ int main(){
         double perevod = min(skolko_dolz[i], kredit[j]);
         if (perevod > 0.001){
             cout << dolznik[i] << " " << perevod << " " << komu_dolz[j] << endl;
+            outfile << dolznik[i] << " " << perevod << " " << komu_dolz[j] << endl; 
         }
 
         skolko_dolz[i] -= perevod;
@@ -127,5 +137,9 @@ int main(){
         if (kredit[j] < 0.001) j++;
     }
 
+    outfile.close();
+
     return 0;
+
+    }
 }
